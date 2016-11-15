@@ -105,7 +105,7 @@ public class AppUser implements Serializable {
 
     @Override
     public String toString() {
-        return "TblUser [id=" + id + ", username=" + username + ", password=" + password
+        return "AppUser [id=" + id + ", username=" + username + ", password=" + password
                 + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
 

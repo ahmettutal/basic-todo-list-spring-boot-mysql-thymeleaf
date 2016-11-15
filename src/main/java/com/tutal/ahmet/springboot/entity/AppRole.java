@@ -62,4 +62,10 @@ public class AppRole implements Serializable {
     public void setContacts(List<AppContact> contacts) {
         this.contacts = contacts;
     }
+
+    @Override
+    public String toString() {
+        return "AppUser [id=" + id + ", rolename=" + rolename + "]";
+    }
+
 }
