@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/todos").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .and()
                     .formLogin()
-                    .loginPage("/login").permitAll()
+                    .loginPage("/login")
                     .defaultSuccessUrl("/todos")
                 .and()
                     .logout()

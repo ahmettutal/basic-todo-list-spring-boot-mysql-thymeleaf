@@ -1,12 +1,12 @@
 package com.tutal.ahmet.springboot.service;
 
 
-import com.tutal.ahmet.springboot.entity.AppUser;
+import com.tutal.ahmet.springboot.entity.User;
 
 public interface UserService {
 
-    void save(AppUser user);
+    void save(User user);
 
-    AppUser findByUsername(String username);
+    User findByUsername(String username);
 
 }

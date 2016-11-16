@@ -5,53 +5,48 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class AppUser implements Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "USERNAME", unique = true, nullable = false)
     private String username;
-
-    @Column(name = "PASSWORD", nullable = false)
     private String password;
-
     private String passwordConfirm;
-
-    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
-
-    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
     @ManyToMany
     @JoinTable(
-            name = "users_roles",
+            name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<AppRole> roles;
+    private List<Role> roles;
 
-    public AppUser() {
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Todos> todoses;
+
+    public User() {
     }
 
-    public AppUser(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public AppUser(String username, String password, String firstName, String lastName) {
+    public User(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,6 +66,7 @@ public class AppUser implements Serializable {
         this.password = password;
     }
 
+    @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -95,17 +91,25 @@ public class AppUser implements Serializable {
         this.lastName = lastName;
     }
 
-    public List<AppRole> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<AppRole> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Todos> getTodoses() {
+        return todoses;
+    }
+
+    public void setTodoses(List<Todos> todoses) {
+        this.todoses = todoses;
     }
 
     @Override
     public String toString() {
-        return "AppUser [id=" + id + ", username=" + username + ", password=" + password
+        return "User [id=" + id + ", username=" + username + ", password=" + password
                 + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
 

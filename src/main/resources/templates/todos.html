@@ -17,10 +17,6 @@
         <div class="col-md-6">
             <div class="todolist not-done">
 
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Logout"/>
-                </form>
-
                 <h1>Todos</h1>
 
                 <input type="text" class="form-control add-todo" placeholder="Add todo">
@@ -29,27 +25,25 @@
 
                 <hr>
                 <ul id="sortable" class="list-unstyled">
-                    <li class="ui-state-default">
+
+                    <li class="ui-state-default" th:each="todos : ${todosList}">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="" />Take out the trash</label>
-                        </div>
-                    </li>
-                    <li class="ui-state-default">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Buy bread</label>
-                        </div>
-                    </li>
-                    <li class="ui-state-default">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Teach penguins to fly</label>
+                                <input type="checkbox" value="" />
+                                <p th:text="${todos.name}"></p>
+                            </label>
                         </div>
                     </li>
                 </ul>
                 <div class="todo-footer">
-                    <strong><span class="count-todos"></span></strong> Items Left
+                    <li>
+                        <strong><span class="count-todos"></span></strong> Items Left
+                        <div class="pull-right">
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Logout"/>
+                            </form>
+                        </div>
+                    </li>
                 </div>
             </div>
         </div>
@@ -57,8 +51,12 @@
             <div class="todolist">
                 <h1>Already Done</h1>
                 <ul id="done-items" class="list-unstyled">
-                    <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
-
+                    <li th:each="todos : ${todosDoneList}">
+                        <p th:text="${todos.name}"></p>
+                        <button class="remove-item btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>

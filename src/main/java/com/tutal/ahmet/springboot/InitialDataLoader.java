@@ -1,9 +1,7 @@
 package com.tutal.ahmet.springboot;
 
-import com.tutal.ahmet.springboot.entity.AppContact;
-import com.tutal.ahmet.springboot.entity.AppRole;
-import com.tutal.ahmet.springboot.entity.AppUser;
-import com.tutal.ahmet.springboot.repository.ContactRepository;
+import com.tutal.ahmet.springboot.entity.Role;
+import com.tutal.ahmet.springboot.entity.User;
 import com.tutal.ahmet.springboot.repository.RoleRepository;
 import com.tutal.ahmet.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +26,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     private RoleRepository roleRepository;
 
     @Autowired
-    private ContactRepository contactRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -39,21 +34,21 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
         if (alreadySetup)
             return;
-        AppContact readContact = createContactIfNotFound("READ_CONTACT");
-        AppContact writeContact = createContactIfNotFound("WRITE_CONTACT");
-        List<AppContact> adminContacts = Arrays.asList(readContact, writeContact);
-        createRoleIfNotFound("ROLE_ADMIN", adminContacts);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readContact));
 
-        AppRole adminRole = roleRepository.findByRolename("ROLE_ADMIN");
-        AppUser user = new AppUser();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setUsername("test");
-        user.setPassword(passwordEncoder.encode("test"));
-        user.setRoles(Arrays.asList(adminRole));
+        createRoleIfNotFound("ROLE_ADMIN");
+        createRoleIfNotFound("ROLE_USER");
 
-        AppUser user2 = userRepository.findByUsername("test");
+        Role adminRole = roleRepository.findByRolename("ROLE_ADMIN");
+        Role userRole = roleRepository.findByRolename("ROLE_USER");
+
+        User user = new User();
+        user.setFirstName("Admin");
+        user.setLastName("Last");
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
+        user.setRoles(Arrays.asList(adminRole, userRole));
+
+        User user2 = userRepository.findByUsername("admin");
         if (user2 == null)
             userRepository.save(user);
 
@@ -61,21 +56,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     }
 
     @Transactional
-    private AppContact createContactIfNotFound(String name) {
-        AppContact contact = contactRepository.findByName(name);
-        if (contact == null) {
-            contact = new AppContact(name);
-            contactRepository.save(contact);
-        }
-        return contact;
-    }
-
-    @Transactional
-    private AppRole createRoleIfNotFound(String name, List<AppContact> contacts) {
-        AppRole role = roleRepository.findByRolename(name);
+    private Role createRoleIfNotFound(String name) {
+        Role role = roleRepository.findByRolename(name);
         if (role == null) {
-            role = new AppRole(name);
-            role.setContacts(contacts);
+            role = new Role(name);
             roleRepository.save(role);
         }
         return role;

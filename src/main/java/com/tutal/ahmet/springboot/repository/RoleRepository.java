@@ -16,13 +16,13 @@
  *******************************************************************************/
 package com.tutal.ahmet.springboot.repository;
 
-import com.tutal.ahmet.springboot.entity.AppRole;
+import com.tutal.ahmet.springboot.entity.Role;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface RoleRepository extends CrudRepository<AppRole, Integer> {
+public interface RoleRepository extends CrudRepository<Role, Integer> {
 
-    List<AppRole> findAll();
-    AppRole findByRolename(String name);
+    List<Role> findAll();
+    Role findByRolename(String name);
 }

@@ -1,6 +1,6 @@
 package com.tutal.ahmet.springboot.service;
 
-import com.tutal.ahmet.springboot.entity.AppUser;
+import com.tutal.ahmet.springboot.entity.User;
 import com.tutal.ahmet.springboot.repository.RoleRepository;
 import com.tutal.ahmet.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,14 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Override
-    public void save(AppUser user) {
+    public void save(User user) {
         user.setPassword(user.getPassword());
         user.setRoles(roleRepository.findAll());
         userRepository.save(user);
     }
 
     @Override
-    public AppUser findByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

@@ -1,6 +1,6 @@
 package com.tutal.ahmet.springboot.controller;
 
-import com.tutal.ahmet.springboot.entity.AppUser;
+import com.tutal.ahmet.springboot.entity.User;
 import com.tutal.ahmet.springboot.service.SecurityService;
 import com.tutal.ahmet.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class RegisterController implements Serializable {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute("userForm") AppUser userForm, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
 
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
         userService.save(userForm);

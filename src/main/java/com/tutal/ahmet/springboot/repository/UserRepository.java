@@ -1,9 +1,9 @@
 package com.tutal.ahmet.springboot.repository;
 
-import com.tutal.ahmet.springboot.entity.AppUser;
+import com.tutal.ahmet.springboot.entity.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<AppUser, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
-    AppUser findByUsername(String username);
+    User findByUsername(String username);
 }
