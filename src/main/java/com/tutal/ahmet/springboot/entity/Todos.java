@@ -2,10 +2,6 @@ package com.tutal.ahmet.springboot.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by ismail on 16.11.2016.
- */
-
 @Entity
 public class Todos {
 
