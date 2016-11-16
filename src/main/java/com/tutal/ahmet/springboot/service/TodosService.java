@@ -13,5 +13,5 @@ public interface TodosService {
 
     void deleteTodos(String name);
 
-    void findByComplatedAndUserId(Model model);
+    void findByCompletedAndUserId(Model model);
 }

@@ -15,7 +15,7 @@ public class Todos {
 
     @Column(unique = true)
     private String name;
-    private boolean complated;
+    private boolean completed;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -24,9 +24,9 @@ public class Todos {
     public Todos() {
     }
 
-    public Todos(String name, boolean complated) {
+    public Todos(String name, boolean completed) {
         this.name = name;
-        this.complated = complated;
+        this.completed = completed;
     }
 
     public Long getId() {
@@ -45,12 +45,12 @@ public class Todos {
         this.name = name;
     }
 
-    public boolean isComplated() {
-        return complated;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setComplated(boolean complated) {
-        this.complated = complated;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public User getUser() {
@@ -60,4 +60,10 @@ public class Todos {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Todos [id=" + id + ", name=" + name + ", completed=" + completed + "]";
+    }
+
 }

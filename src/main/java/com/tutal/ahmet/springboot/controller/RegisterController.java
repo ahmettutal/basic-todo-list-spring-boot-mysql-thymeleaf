@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 
 @Controller
@@ -27,12 +28,19 @@ public class RegisterController implements Serializable {
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/register")
-    public String register() {
+    public String register(Model model) {
+
+        model.addAttribute("userForm", new User());
+
         return "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
 
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
         userService.save(userForm);

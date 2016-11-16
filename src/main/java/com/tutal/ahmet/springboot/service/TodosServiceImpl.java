@@ -38,7 +38,7 @@ public class TodosServiceImpl implements TodosService {
 
         Todos todos = findByName(name);
 
-        todos.setComplated(true);
+        todos.setCompleted(true);
 
         todosRepository.save(todos);
     }
@@ -52,12 +52,15 @@ public class TodosServiceImpl implements TodosService {
     }
 
     @Override
-    public void findByComplatedAndUserId(Model model) {
+    public void findByCompletedAndUserId(Model model) {
 
-        model.addAttribute("todosList", todosRepository.findByComplatedAndUserId(false, getCurrentUser().getId()));
+        User currentUser = getCurrentUser();
 
-        model.addAttribute("todosDoneList", todosRepository.findByComplatedAndUserId(true, getCurrentUser().getId()));
+        model.addAttribute("todosList", todosRepository.findByCompletedAndUserId(false, currentUser.getId()));
 
+        model.addAttribute("todosDoneList", todosRepository.findByCompletedAndUserId(true, currentUser.getId()));
+
+        model.addAttribute("username", currentUser.getUsername());
     }
 
     public User getCurrentUser() {

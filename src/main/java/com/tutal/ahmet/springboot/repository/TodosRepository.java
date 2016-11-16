@@ -9,6 +9,6 @@ public interface TodosRepository extends CrudRepository<Todos, Long> {
 
     Todos findByName(String name);
 
-    List<Todos> findByComplatedAndUserId(boolean complated, Long Id);
+    List<Todos> findByCompletedAndUserId(boolean complated, Long Id);
 
 }

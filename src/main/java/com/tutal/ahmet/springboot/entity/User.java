@@ -1,6 +1,8 @@
 package com.tutal.ahmet.springboot.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,10 +13,26 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    @Size(min = 5, max = 26)
+    @NotNull
     private String username;
+
+    @Column(nullable = false)
+    @Size(min = 5)
+    @NotNull
     private String password;
+
     private String passwordConfirm;
+
+    @Column(nullable = false)
+    @Size(min = 5, max = 26)
+    @NotNull
     private String firstName;
+
+    @Column(nullable = false)
+    @Size(min = 5, max = 26)
+    @NotNull
     private String lastName;
 
     @ManyToMany
@@ -112,6 +130,5 @@ public class User implements Serializable {
         return "User [id=" + id + ", username=" + username + ", password=" + password
                 + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
-
 
 }

@@ -12,10 +12,9 @@
 </head>
 <body>
 <div class="container">
-
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form" th:action="@{/register}" method="post">
+            <form role="form" th:object="${userForm}" th:action="@{/register}" method="post">
 
                 <h2>Please Sign Up <small>And create Todos.</small></h2>
 
@@ -50,6 +49,30 @@
                         <div class="form-group">
                             <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
                         </div>
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('firstName')}" >
+                    <div class="alert alert-danger" >
+                        First Name length should be 5 - 26 characters
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('lastName')}" >
+                    <div class="alert alert-danger" >
+                        Last Name length should be 5 - 26 characters
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('username')}" >
+                    <div class="alert alert-danger" >
+                        User Name length should be 5 - 26 characters
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('password')}" >
+                    <div class="alert alert-danger" >
+                        Password length must be greater than 5
                     </div>
                 </div>
 

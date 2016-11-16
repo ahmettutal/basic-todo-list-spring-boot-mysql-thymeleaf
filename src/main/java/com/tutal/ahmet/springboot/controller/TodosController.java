@@ -1,6 +1,5 @@
 package com.tutal.ahmet.springboot.controller;
 
-import com.tutal.ahmet.springboot.entity.Todos;
 import com.tutal.ahmet.springboot.service.TodosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,10 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Controller
 @RequestMapping("/todos")
@@ -25,7 +22,7 @@ public class TodosController implements Serializable {
     @RequestMapping(method = RequestMethod.GET)
     public String todos(Model model) {
 
-        todosService.findByComplatedAndUserId(model);
+        todosService.findByCompletedAndUserId(model);
 
         return "todos";
     }
